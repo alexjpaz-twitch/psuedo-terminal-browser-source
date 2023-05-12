@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react';
 
 import 'xterm/css/xterm.css'
 import { Terminal } from 'xterm';
@@ -10,11 +9,8 @@ import TerminalFaker from './TerminalFaker';
 function Term() {
   const terminalRef = React.useRef();
 
-  const [ terminal, setTerminal ] = React.useState(null);
 
   useEffect(() => {
-
-    if(terminal) return;
 
     const node = terminalRef.current;
 

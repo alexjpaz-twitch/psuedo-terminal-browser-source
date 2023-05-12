@@ -44,7 +44,7 @@ class TerminalFaker {
 
   async humanizeWrite(text = "", min = 25, max = 100) {
     for await(const character of text) {
-      if(!character == "\n") {
+      if(!character === "\n") {
         await this.randomWait(min, max)
       }
       this.term.write(character);
