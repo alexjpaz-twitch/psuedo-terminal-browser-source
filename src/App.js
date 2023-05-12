@@ -1,5 +1,6 @@
 import React from 'react';
 
+import './App.css'
 import 'xterm/css/xterm.css'
 import { Terminal } from 'xterm';
 
@@ -16,10 +17,14 @@ function Term() {
 
     const node = terminalRef.current;
 
+    const params = new URLSearchParams(window.location.hash.replace("#?",""));
+console.log(params.keys, window.location.hash)
     let term = new Terminal({
+      fontSize: params.get("term.fontSize") || 24,
       cursorBlink: true,
-      rows: 20,
-      cols: 200
+      cursorStyle: "block",
+      rows: params.get("term.rows") || 34,
+      cols: params.get("term.cols") || 84
     });
 
     term.open(node);
