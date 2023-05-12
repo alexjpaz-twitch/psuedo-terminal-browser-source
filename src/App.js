@@ -12,6 +12,8 @@ function Term() {
 
   useEffect(() => {
 
+    if(process.env.NODE_ENV === "test") return;
+
     const node = terminalRef.current;
 
     let term = new Terminal({
