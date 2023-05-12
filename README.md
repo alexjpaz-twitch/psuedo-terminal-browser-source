@@ -1,1 +1,1 @@
-# psuedo-terminal-browser-source
+# psuedo-terminal
