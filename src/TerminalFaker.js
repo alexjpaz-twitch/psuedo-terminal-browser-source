@@ -31,6 +31,28 @@ class TerminalFaker {
     }
   }
 
+  async runAsciArt() {
+    await this.humanizeWrite("cat /home/alexjpaz/ascii/chonkers.txt \n\r");
+
+    this.term.write(
+    `
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠴⢿⣧⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣧⣆⣘⡄⢹⣿⣷⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⢿⣷⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⣴⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣴⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⢀⣀⡀⣾⡿⠀⠉⠉⠛⠋⠛⠛⠚⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀
+    ⠀⠀⠀⢠⣍⠹⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⢿⣷⣾⣿⣿⠀⠀⠀⠀⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⢹⣟⢻⣿⣄⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠻⠿⠟⠁⠑⢶⣤⣴⣿⣿⣿⣷⣶⣬⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⢛⣿⣿⣿⣿⡿⠛⠁⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⢿⡿⠟⠀⠀⠀⠀⠀⠀⠀⠀`.replace(/\n/g, '\n\r')
+    );
+    this.term.write("\n\r");
+  }
+
   async runCatWallOfShame() {
     await this.humanizeWrite("cat /home/alexjpaz/wall_of_shame.txt \n\r");
     await this.wait(300);
@@ -97,13 +119,14 @@ class TerminalFaker {
     ]
 
     const commands = [
-       this.runPlayStarWars,
-      // this.runCatWallOfShame,
-      // this.runShowYams,
-      // () => this.runQRCode("/home/alexjpaz/jumbler.txt", "fuck you jumbler"),
-      // () => this.runQRCode("/home/alexjpaz/discord.txt", "https://discord.gg/M9p7Q4A"),
-      // () => this.runQRCode("/home/alexjpaz/gameclub.txt", "https://join.enjoygame.club/"),
-      // this.runCatFacts,
+      this.runAsciArt,
+      this.runPlayStarWars,
+      this.runCatWallOfShame,
+      this.runShowYams,
+      () => this.runQRCode("/home/alexjpaz/jumbler.txt", "fuck you jumbler"),
+      () => this.runQRCode("/home/alexjpaz/discord.txt", "https://discord.gg/M9p7Q4A"),
+      () => this.runQRCode("/home/alexjpaz/gameclub.txt", "https://join.enjoygame.club/"),
+      this.runCatFacts,
     ];
 
 
@@ -118,6 +141,7 @@ class TerminalFaker {
 
       await command.call(this);
     } catch(e) {
+      console.error(e);
       this.term.writeln("\n\rcommand exited with non-zero status " +e.message);
     }
   }
