@@ -11,7 +11,7 @@ class TerminalFaker {
   }
 
   async runPlayStarWars() {
-    //await this.humanizeWrite("telnet towel.blinkenlights.nl \n\r");
+    await this.humanizeWrite("telnet towel.blinkenlights.nl \n\r");
     await this.wait(1000);
 
     const film = await fetch("./starwars.txt")
