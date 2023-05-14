@@ -21,6 +21,7 @@ function Term() {
 console.log(params.keys, window.location.hash)
     let term = new Terminal({
       fontSize: params.get("term.fontSize") || 24,
+      fontFamily: "Source Code Pro",
       cursorBlink: true,
       cursorStyle: "block",
       rows: params.get("term.rows") || 34,

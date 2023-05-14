@@ -10,6 +10,27 @@ class TerminalFaker {
     this.term.write("$ ");
   }
 
+  async runPlayStarWars() {
+    await this.humanizeWrite("telnet towel.blinkenlights.nl \n\r");
+    await this.wait(1000);
+
+    const film = await fetch("./starwars.txt")
+      .then(r => r.text())
+    ;
+
+    // https://gist.github.com/JLChnToZ/5f4b1a3e81373b3b20330c6a89067f1b
+    const LINES_PER_FRAME = 14;
+    const DELAY = 67;
+
+    const frames = film.split("\n");
+
+    for(let i = 0; i < frames.length; i += LINES_PER_FRAME) {
+      this.term.write(`\x1b[${LINES_PER_FRAME}A\x1b[J${frames.slice(i + 1, i + LINES_PER_FRAME).join('\r\n')}`);
+
+      await new Promise(r => setTimeout(r, parseInt(frames[i], 10) * DELAY));
+    }
+  }
+
   async runCatWallOfShame() {
     await this.humanizeWrite("cat /home/alexjpaz/wall_of_shame.txt \n\r");
     await this.wait(300);
@@ -70,16 +91,28 @@ class TerminalFaker {
 
   async randomCommand() {
 
+    const rareCommands = [
+      this.runPlayStarWars,
+    ]
+
     const commands = [
       this.runCatWallOfShame,
       this.runShowYams,
       () => this.runQRCode("/home/alexjpaz/jumbler.txt", "fuck you jumbler"),
       () => this.runQRCode("/home/alexjpaz/discord.txt", "https://discord.gg/M9p7Q4A"),
+      () => this.runQRCode("/home/alexjpaz/gameclub.txt", "https://join.enjoygame.club/"),
       this.runCatFacts,
     ];
 
+
     try {
-      const command = commands[Math.floor(Math.random()*commands.length)];
+      let command = () => {};
+
+      if(Math.random() < 0.1) {
+        command = rareCommands[Math.floor(Math.random()*rareCommands.length)];
+      } else {
+        command = commands[Math.floor(Math.random()*commands.length)];
+      }
 
       await command.call(this);
     } catch(e) {
