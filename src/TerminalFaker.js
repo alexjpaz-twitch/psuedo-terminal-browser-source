@@ -133,7 +133,7 @@ class TerminalFaker {
     try {
       let command = () => {};
 
-      if(Math.random() < 0.1) {
+      if(Math.random() < 0.01) {
         command = rareCommands[Math.floor(Math.random()*rareCommands.length)];
       } else {
         command = commands[Math.floor(Math.random()*commands.length)];
