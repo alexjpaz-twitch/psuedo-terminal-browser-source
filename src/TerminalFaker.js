@@ -115,7 +115,7 @@ class TerminalFaker {
   async randomCommand() {
 
     const rareCommands = [
-      this.runPlayStarWars,
+      // this.runPlayStarWars,
     ]
 
     const commands = [
