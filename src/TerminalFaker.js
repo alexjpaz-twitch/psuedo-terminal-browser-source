@@ -34,6 +34,7 @@ class TerminalFaker {
   async runAsciArt() {
     await this.humanizeWrite("cat /home/alexjpaz/ascii/chonkers.txt \n\r");
 
+    
     this.term.write(
     `
     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠴⢿⣧⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -58,7 +59,6 @@ class TerminalFaker {
     await this.wait(300);
 
     await this.slowWrite(`
-    \rdark souls 1
     \rholy diver
     \reinhänder
     \rstardew valley
