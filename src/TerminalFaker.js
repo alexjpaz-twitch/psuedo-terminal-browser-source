@@ -120,7 +120,6 @@ class TerminalFaker {
 
     const commands = [
       this.runAsciArt,
-      this.runPlayStarWars,
       this.runCatWallOfShame,
       this.runShowYams,
       () => this.runQRCode("/home/alexjpaz/jumbler.txt", "fuck you jumbler"),
